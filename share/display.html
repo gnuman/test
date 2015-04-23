@@ -1,0 +1,404 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Share Activity Block</title>
+
+    <link rel="stylesheet" href="/openlearning.css">
+    <script src="/openlearning.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="css/font-awesome.css">
+    <link rel="stylesheet" type="text/css" href="css/selectize.css">
+    <link rel="stylesheet" type="text/css" href="css/sharing.css">
+    <link rel="stylesheet" type="text/css" href="css/tooltipster.css">
+
+    <script src="jquery.js"></script>
+    <script src="dust-full.min.js"></script>
+    <script src="dust-helpers.min.js"></script>
+    <script src="underscore-min.js"></script>
+    <script src="selectize.js"></script>
+    <script src="jquery.tooltipster.min.js"></script>
+
+    <script src="./tinymce/jquery.tinymce.min.js"></script>
+    <script src="./tinymce/tinymce-openlearning.js"></script>
+    <!-- TODO: REPLACE WHEN WE HAVE TIME -->
+    <script src="Utilities.js"></script>
+
+    <style>
+
+
+    /* Building up a generic styles */
+
+    /* Buttons */
+    a, a:hover, a:active, a:visited {
+        text-shadow: none;
+        background-image: none;
+        text-decoration: none;
+    }
+    .btn {
+        font-size: 14px;
+        border-radius: 4px;
+        padding: 5px 10px 5px 10px;
+        text-align: center;
+    }
+    .btn.btn-primary {
+        background-color: #20ce6d;
+        color: #fff;
+    }
+    a.btn-primary:hover
+    {
+        background-color: #1baf5c;
+        color: #fff;
+        cursor: pointer;
+    }
+
+    .btn.btn-secondary {
+        border: 1px solid #b8e6e6;
+        background-color: #d7f1f1;
+        color: #6bcbca;
+    }
+    a.btn-secondary:hover
+    {
+        background-color: #b3e4e3;
+        color: #fff;
+        cursor: pointer;
+    }
+    a.btn-secondary.active {
+        background-color: #b3e4e3;
+        color: #fff;   
+    }
+
+    .btn-square-icon {
+        padding: 4px 8px 4px 8px;
+    }
+
+    /* Forms */
+    .input {
+        -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+        -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+        box-sizing: border-box;         /* Opera/IE 8+ */
+
+        font-size: 14px;
+        height: 3em;
+        border-radius: 4px;
+        padding: 1% 2% 1% 2%;
+        border: 1px solid #c9cbcd;
+        margin-bottom: 10px;
+    }
+    .input-wide {
+        width: 100%;
+    }
+    textarea.input {
+        height: 194px;
+    }
+
+
+    /* Layout */
+    .left {
+        float: left;
+    }
+    .right {
+        float: right;
+    }
+    .clear-both {
+        clear: both;
+    }
+
+
+
+
+    /* Share widget specific */
+
+    .share {
+/*        border-radius: 4px;
+        border: 1px solid #edeff3;
+        padding: 10px;
+        background-color: #d7f1f1;*/
+
+        /*border-top: 1px solid #edeff3;*/
+        /*border-bottom: 1px solid #edeff3;*/
+        padding-bottom: 10px;
+    }
+
+    .share h6 {
+        font-weight: bold;
+        text-align: center;
+        /*border-top: 1px solid #edeff3;*/
+        /*border-bottom: 1px solid #edeff3;*/
+        /*padding: 5px;*/
+    }
+
+    .share img {
+        border: 1px solid #edeff3;
+        border-radius: 4px;
+        width: 38px;
+        color: #515151;
+    }
+    .share .share-inputs {
+        margin-left: 50px;
+    }
+    .attachment-panel {
+        width: 175px;
+        margin-bottom: 5px;
+    }
+
+    .editor-container {
+        visibility: hidden;
+        width: 100%;
+        height: 0;
+        margin-bottom: 25px;
+        overflow: hidden;
+    }
+
+    .ol-sharing-entry {
+        padding: 0px;
+    }
+
+    .ol-sharing-files-drop {
+        background-image: url('images/add-files.png');
+    }
+
+    .ol-sharing-picture-drop {
+        background-image: url('images/add-picture.png');
+    }
+
+    .hide {
+        display: none;
+    }
+
+    textarea {
+        resize: none;
+
+    }
+
+    @media (max-width: 500px) {
+        .share img {
+            width: 35px;
+        }
+        .share .share-inputs {
+            margin-left: 40px;
+        }
+    }
+
+
+
+    </style>
+</head>
+
+
+
+
+<body>
+
+
+
+<div class="share">
+
+    <h6>Share Something with the Community</h6>
+    <img id="ol-sharing-avatar" class="left" src="images/Placeholder2.png"></img>
+    <div class="share-inputs" id="share">
+        <input id="start-sharing-input" type="text" class="input input-wide" placeholder="Have you found something interesting? Share it!">
+        <div id="ol-share-container" class="share-container">
+            <div class="row-fluid">
+                <div class="editor-container">
+                    <div class="ol-sharing-entry" id="ol-sharing-page-entry">
+                        <form>
+                            <input type="text" class="input input-wide" id="ol-sharing-page-title" name="ol-sharing-page-title" placeholder="Title">
+                            <textarea height="0" id="ol-sharing-page-content" name="ol-sharing-page-content" class="input input-wide" placeholder="Text"></textarea>
+                            <div style="margin-top: 10px;">
+                                <input type="text" class="ol-sharing-tags" id="ol-sharing-page-tags" name="ol-sharing-page-tags" placeholder="Add tags here">
+                                <span class="ol-sharing-overlay"><i class="icon-tag"></i></span>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="left attachment-panel hide">
+            <a class="btn btn-secondary btn-square-icon tooltip" id="TextButton" title="Share a page"><i class="fa fa-file-text-o"></i></a>
+            <a class="btn btn-secondary btn-square-icon tooltip" id="PhotoButton" title="Share a photo"><i class="fa fa-camera"></i></a>
+            <a class="btn btn-secondary btn-square-icon tooltip" id="AttachmentButton" title="Share a file"><i class="fa fa-paperclip"></i></a>
+            <a class="btn btn-secondary btn-square-icon tooltip" id="LinkButton" title="Share a link"><i class="fa fa-link"></i></a>
+            <a class="btn btn-secondary btn-square-icon tooltip" id="VideoButton" title="Share a video"><i class="fa fa-video-camera"></i></a>
+        </div>
+        <div class="right">
+            <a class="btn btn-primary" id="shareButton">Share</a>
+        </div>
+        <div class="clear-both"></div>
+        <!-- <p style="color:#6bcbca;">Paste your link into the text area.</p> -->
+    </div>
+</div>
+
+<script type="text/javascript">
+OL(function() {
+    var currentShareType;
+
+    var tinymceOptions = {
+        content: '',
+        fileLoader: null,
+        imageBrowserURL: null,
+        linkBrowserURL: null,
+        contextPath: '/',
+        classPath: null,
+        contextName: 'Site',
+        SITE_URL: '/',
+        MEDIA_URL: '/media/',
+        minHeight: 80,
+        heightOffset: null,
+        storageID: null,
+        hasStatusBar: false,
+        showIndicator: false,
+        saveCallback: function(editor, doneSavingCallback) {
+            alert('TODO: Save');
+        },
+        initCallback: function(editor) {
+            initEditor(editor);
+        },
+        changeCallback: function(editor) {
+        },
+        mode: 'edit'            
+    }
+
+    var initEditor = function(editor) {
+        var $startSharing = $('#start-sharing-input');
+        var $pageContent = $('#ol-sharing-page-content');
+        var updateToolbar = TinyMCE_OpenLearning.scroll_tinymce_toolbar($pageContent, tinymceOptions.heightOffset);
+
+        editor.setContent($startSharing.val());
+        editor.focus();
+
+        OL.resize();
+
+        // handle the change undo and redo event (when the editor grows/shrinks in height)
+        editor.on('NodeChange', function(event) {
+            OL.resize();
+        });
+    };
+
+    var init = function(options) {
+        var filepickerPictureOptions = {
+            'filepicker_mimetypes': ['image/*']
+        };
+        var $shareContainer = $('#ol-share-container');
+        var $startSharing = $('#start-sharing-input');
+        var $pageContent = $('#ol-sharing-page-content');
+        var $pageEntry = $('#ol-sharing-page-entry');
+        var $avatar = $('#ol-sharing-avatar');
+        var $shareButton = $('#shareButton');
+
+        var showEditor = function() {
+            $startSharing.fadeOut();
+            $shareContainer.find('.editor-container')
+                .css('visibility', 'visible')
+                .css('height', 'auto')
+                .fadeIn()
+            ;
+            currentShareType = 'TextButton';
+
+            if (tinymce.activeEditor) {
+                tinymce.activeEditor.setContent($startSharing.val());
+                OL.resize();
+            }
+        };
+
+        var hideEditor = function() {
+            $startSharing.fadeIn();
+            $shareContainer.find('.editor-container')
+                .css('visibility', 'hidden')
+                .css('height', 0)
+                .fadeOut()
+            ;
+            OL.resize();
+        }
+
+        var disableSharingButton = function() {
+            $shareButton.text('Sharing...');
+            $shareButton.attr('disabled', 'disabled');
+        };
+
+        var enableSharingButton = function() {
+            $shareButton.text('Share');
+            $shareButton.removeAttr('disabled');
+        };
+
+        var resetForm = function() {
+            $shareContainer.find('input,textarea').val('');
+            $shareContainer.find('.ol-sharing-tags').each(function(i, elm) {
+                if (elm.selectize) {
+                    elm.selectize.clear();
+                    elm.selectize.enable();
+                    elm.selectize.blur();
+                }
+            });
+
+            $startSharing.val('');
+            hideEditor();
+            enableSharingButton();
+        };
+
+        var showNotification = function(url, text) {
+            OL.notify(
+                'Successfully shared!',
+                'Thanks for sharing! Your page can be found at <a href="' + url + '">' + text + '</a>'
+            );
+        };
+
+        $avatar.attr('src', OL.user.profile.avatar);
+
+        $('.tooltip').tooltipster();
+
+        $pageContent.tinymce(TinyMCE_OpenLearning.get_settings('mini', tinymceOptions));
+
+        $('.ol-sharing-tags').selectize({
+            delimiter: ',',
+            persist  : false,
+            create   : true,
+            dropdownParent: 'body',
+            placeholder: 'Add tags here'
+        });
+
+        $startSharing.on('keypress', _.debounce(showEditor, 1000));
+
+        $shareButton.on('click', function() {
+            var $this = $(this);
+            var pagePath = OL.page.path;
+            var relatedToPage = (location.pathname.length && location.pathname[0] == '/') ? location.pathname.slice(1) : location.pathname;
+
+            switch (currentShareType) {
+                case 'TextButton':
+                    var data = $.Utilities.serializeObject($('#ol-sharing-page-entry').find('form'));
+                    data['ol-sharing-page-content'] = tinymce.activeEditor.getContent();
+
+                    var ajaxData = {
+                        'title': $.trim(data['ol-sharing-page-title']),
+                        'content': data['ol-sharing-page-content'],
+                        'tags': data['ol-sharing-page-tags'],
+                        'relatedToPage': relatedToPage
+                    };
+
+                    if (ajaxData.title == '') {
+                        alert('A valid page title is required.');
+                    } else {
+                        disableSharingButton();
+                        OL.resource.update('share', pagePath, 'addPage', ajaxData, function(result) {
+                            resetForm();
+                            showNotification(result.response.url, ajaxData.title);
+
+                            OL.trigger('activity.share.page');
+                        });
+                    }
+                    break;
+                default:
+                    alert('There was an error. Could not work out share type.');
+            }
+        });
+    };
+
+    init();
+});
+
+</script>
+
+</body>
+</html>
