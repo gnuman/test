@@ -8,7 +8,7 @@
     "ignore": [
 	".jshintrc",
 	"**/*.txt",
-	"examples/*",
+	"examples/*"
     ],
     "dependencies": {
 	"<name>": "<version>",
