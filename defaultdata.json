@@ -1,10 +1,10 @@
 {
-    "name": "projectname",
+    "name": "wikipage",
     "author": "",
     "email": "",
     "license": "Apache2",
     "version": "1.0.0",
-    "main": "path/to/display.html",
+    "main": "http://en.wikipedia.org/wiki/Main_Page.html",
     "ignore": [
 	".jshintrc",
 	"**/*.txt",
