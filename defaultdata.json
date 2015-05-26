@@ -5,6 +5,8 @@
     "license": "Apache2",
     "version": "1.0.0",
     "main": "http://en.wikipedia.org/wiki/Main_Page.html",
+    "setup": "",
+    "category": "",
     "ignore": [
 	".jshintrc",
 	"**/*.txt",
