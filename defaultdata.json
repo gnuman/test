@@ -1,9 +1,9 @@
 {
-    "name": "wikipage",
+    "name": "wikipage1",
     "author": "",
     "email": "",
     "license": "Apache2",
-    "version": "12345.0.0",
+    "version": "1",
     "main": "http://en.wikipedia.org/wiki/Main_Page.html",
     "setup": "",
     "category": "",
