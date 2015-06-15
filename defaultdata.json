@@ -1,10 +1,11 @@
 {
-    "name": "wikipage1",
+    "name": "testactivity",
     "author": "",
     "email": "",
     "license": "Apache2",
     "version": "1",
-    "main": "http://en.wikipedia.org/wiki/Main_Page.html",
+    "main": "Main_Page.html",
+    "description": "This is a test activity",
     "setup": "",
     "category": "",
     "ignore": [
