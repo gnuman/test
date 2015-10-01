@@ -1,12 +1,14 @@
 {
     "name": "stagingact",
-    "author": "",
+    "author": [""],
     "email": "",
     "license": "Apache2",
     "version": "2",
-    "main": "Main_Page.html",
     "description": "This is a test activity",
-    "setup": "",
+    "display": {
+        "main": "display.html",
+        "setup": "setup.html"
+    },
     "category": "",
     "ignore": [
 	".jshintrc",
