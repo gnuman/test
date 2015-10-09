@@ -29,9 +29,7 @@
         "comparison": "equal"
     },
 
-    "collaboration": false,
+    "collaboration": false
 
-    "sharing": false,
-    "internal": true 
 }
 
