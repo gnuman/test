@@ -3,7 +3,7 @@
     "author": ["David Collien"],
     "email": "david@openlearning.com",
     "license": "MIT",
-    "version": "0.0.2",
+    "version": "0.0.8",
     "description": "Check items off a list towards completion.",
     "category": "Self Assessment",
 
@@ -16,9 +16,18 @@
     "display": {
         "main": "display.html",
         "setup": "setup.html"
-    }
+    },
 
-    
+    "completion": {
+        "settings": ["interaction", "progress", "custom"],
+        "progress": "keys",
+        "default": "custom",
+        "customText": "Completed when everything has been checked off",
+        "criteria": {
+            "1": true
+        },
+        "comparison": "equal"
+    }
 
 }
 
